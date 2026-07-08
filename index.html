@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio Link của Tôi</title>
+    <style>
+        /* --- PHẦN 1: CÀI ĐẶT GIAO DIỆN CHUNG --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Màu nền gradient */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        /* Thùng chứa chính - tối ưu kích thước điện thoại */
+        .bio-container {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.85); /* Nền trắng trong suốt nhẹ */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+        }
+
+        /* --- PHẦN 2: THÔNG TIN CÁ NHÂN (AVATAR & BIO) --- */
+        .avatar {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 15px 0 5px 0;
+            color: #111;
+        }
+
+        .username {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            font-size: 0.95rem;
+            line-height: 1.4;
+            margin-bottom: 30px;
+            color: #444;
+        }
+
+        /* --- PHẦN 3: CÁC NÚT ĐƯỜNG LINK --- */
+        .links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 16px; /* Khoảng cách giữa các nút */
+        }
+
+        .link-card {
+            display: block;
+            text-decoration: none;
+            background-color: #ffffff;
+            color: #111111;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        /* Hiệu ứng khi lướt ngón tay hoặc chuột qua nút */
+        .link-card:hover {
+            transform: translateY(-2px);
+            background-color: #111111;
+            color: #ffffff;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bio-container">
+        <!-- Ảnh đại diện -->
+        <img class="avatar" src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-1/653701024_2080420979482672_2619657445145489457_n.jpg?stp=c0.343.1536.1536a_dst-jpg_tt6&cstp=mx1536x1536&ctp=s200x200&_nc_cat=109&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeGAg_S29ZpODfXMUIuAM0cfe8yqVdgDB0p7zKpV2AMHSommLXLMJekLfPKVVsNhjKaa2zpeIdWaN7ddSaS-q0hJ&_nc_ohc=f6NLJcfVVggQ7kNvwHFwcmC&_nc_oc=AdrQzWK2HISUTNZmYRCDJ-SZ6pbjKEjsVvXGz3VNM10gKowbcU0fo6KwI5TSqazKcw3x-ijXWIGI2yDHZELRhzsv&_nc_zt=24&_nc_ht=scontent.fhan15-1.fna&_nc_gid=P66iTEpnPtJDb_MSt7z5vg&_nc_ss=7b2a8&oh=00_AQBs1fwD7P5y1HD4uVJm8FP0T-f6lDsVPGpDPyt70JK5Wg&oe=6A540C65" alt="Avatar">
+        
+        <!-- Tên và Bio -->
+        <div class="name">Nguyễn Khiêm</div>
+        <div class="username">@khiemnguyen</div>
+        <div class="description">Chia sẻ những sản phẩm chất lượng & ưu đãi tốt nhất dành cho bạn.</div>
+
+        <!-- Danh sách Link Tiếp Thị Liên Kết -->
+        <div class="links-wrapper">
+            
+            <!-- Nút Link số 1 -->
+            <a href="https://shope.ee/vi-du-1" target="_blank" class="link-card">
+                🛍️ Deal Hot Shopee Hôm Nay
+            </a>
+
+            <!-- Nút Link số 2 -->
+            <a href="https://shope.ee/vi-du-2" target="_blank" class="link-card">
+                📦 Các Sản Phẩm Mình Đã Review
+            </a>
+
+            <!-- Nút Link số 3 -->
+            <a href="https://yourwebsite.com" target="_blank" class="link-card">
+                📱 Kênh TikTok / Facebook của mình
+            </a>
+            
+        </div>
+    </div>
+
+</body>
+</html>
