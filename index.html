@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bio Link của Tôi</title>
     <style>
-        /* --- PHẦN 1: CÀI ĐẶT GIAO DIỆN CHUNG --- */
+        /* --- GIAO DIỆN CHUNG --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Màu nền gradient */
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
             padding: 20px;
             display: flex;
@@ -18,19 +18,19 @@
             color: #333;
         }
 
-        /* Thùng chứa chính - tối ưu kích thước điện thoại */
         .bio-container {
             width: 100%;
             max-width: 480px;
             text-align: center;
             padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.85); /* Nền trắng trong suốt nhẹ */
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            box-sizing: border-box;
         }
 
-        /* --- PHẦN 2: THÔNG TIN CÁ NHÂN (AVATAR & BIO) --- */
+        /* --- THÔNG TIN CÁ NHÂN --- */
         .avatar {
             width: 96px;
             height: 96px;
@@ -60,13 +60,14 @@
             color: #444;
         }
 
-        /* --- PHẦN 3: CÁC NÚT ĐƯỜNG LINK --- */
+        /* --- KHU VỰC CHỨA CÁC NÚT --- */
         .links-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 16px; /* Khoảng cách giữa các nút */
+            gap: 14px;
         }
 
+        /* Nút link đơn độc lập */
         .link-card {
             display: block;
             text-decoration: none;
@@ -79,74 +80,160 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(0,0,0,0.05);
+            box-sizing: border-box;
+            text-align: center;
         }
 
-        /* Hiệu ứng khi lướt ngón tay hoặc chuột qua nút */
         .link-card:hover {
             transform: translateY(-2px);
             background-color: #111111;
             color: #ffffff;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
+
+        /* Nút thư mục lớn bấm xổ xuống */
+        .category-btn {
+            width: 100%;
+            background-color: #ffffff;
+            color: #111111;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .category-btn:hover {
+            background-color: #f8f9fa;
+            border-color: #ccc;
+        }
+
+        /* Thêm ký hiệu mũi tên nhỏ ở cuối nút */
+        .category-btn::after {
+            content: '▼';
+            font-size: 0.7rem;
+            color: #888;
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .category-btn.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* Hộp chứa sản phẩm ẩn/hiện */
+        .products-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 5px;
+            text-align: left;
+        }
+
+        /* THẺ SẢN PHẨM CON BÊN TRONG - ĐÃ FIX LỖI */
+        .product-item {
+            display: block !important;
+            text-decoration: none !important;
+            background: #ffffff !important;
+            color: #333333 !important;
+            padding: 14px 15px !important;
+            border-radius: 8px !important;
+            font-size: 0.95rem !important;
+            font-weight: 500 !important;
+            border-left: 4px solid #ee4d2d !important; /* Vạch cam thương hiệu */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
+            transition: all 0.2s ease !important;
+            box-sizing: border-box !important;
+        }
+
+        .product-item:hover {
+            background: #fdf5f2 !important;
+            color: #ee4d2d !important;
+            transform: translateX(4px);
+        }
     </style>
 </head>
 <body>
 
     <div class="bio-container">
-        <!-- Ảnh đại diện -->
+        <!-- Ảnh đại diện của Khiêm -->
         <img class="avatar" src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-1/653701024_2080420979482672_2619657445145489457_n.jpg?stp=c0.343.1536.1536a_dst-jpg_tt6&cstp=mx1536x1536&ctp=s200x200&_nc_cat=109&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeGAg_S29ZpODfXMUIuAM0cfe8yqVdgDB0p7zKpV2AMHSommLXLMJekLfPKVVsNhjKaa2zpeIdWaN7ddSaS-q0hJ&_nc_ohc=f6NLJcfVVggQ7kNvwHFwcmC&_nc_oc=AdrQzWK2HISUTNZmYRCDJ-SZ6pbjKEjsVvXGz3VNM10gKowbcU0fo6KwI5TSqazKcw3x-ijXWIGI2yDHZELRhzsv&_nc_zt=24&_nc_ht=scontent.fhan15-1.fna&_nc_gid=P66iTEpnPtJDb_MSt7z5vg&_nc_ss=7b2a8&oh=00_AQBs1fwD7P5y1HD4uVJm8FP0T-f6lDsVPGpDPyt70JK5Wg&oe=6A540C65" alt="Avatar">
         
-        <!-- Tên và Bio -->
         <div class="name">Nguyễn Khiêm</div>
         <div class="username">@khiemnguyen</div>
         <div class="description">Chia sẻ những sản phẩm chất lượng & ưu đãi tốt nhất dành cho bạn.</div>
 
-        <!-- Danh sách Link Tiếp Thị Liên Kết -->
         <div class="links-wrapper">
             
-            <!-- Nút Link số 1 -->
-            <a href="https://shope.ee/vi-du-1" target="_blank" class="link-card">
+            <!-- Nút Deal Hot -->
+            <a href="https://s.shopee.vn/2BD4cU20EK" target="_blank" class="link-card">
                 🛍️ Deal Hot Shopee Hôm Nay
             </a>
 
-            <!-- DANH MỤC: ĐỒ GIA DỤNG -->
-<button class="category-btn" onclick="toggleCategory(this)">📦 Đồ Gia Dụng</button>
-<div class="products-list">
-    
-    <!-- Sản phẩm 1 -->
-    <a href="https://s.shopee.vn/2BD4cU20EK" target="_blank" class="product-item">
-        🍳 Nồi nấu cháo chậm Beer giảm 30%
-    </a>
-    
-    <!-- Sản phẩm 2 -->
-    <a href="https://s.shopee.vn/70IKNU7Nac" target="_blank" class="product-item">
-        🔥 Bếp Từ Đơn Engler EGL336
-    </a>
+            <!-- THƯ MỤC LỚN 1: ĐỒ GIA DỤNG -->
+            <button class="category-btn" onclick="toggleCategory(this)">📦 Đồ Gia Dụng</button>
+            <div class="products-list">
+                <a href="https://s.shopee.vn/2BD4cU20EK" target="_blank" class="product-item">🍳 Nồi nấu cháo chậm Bear giảm 30%</a>
+                <a href="https://s.shopee.vn/70IKNU7Nac" target="_blank" class="product-item">🔥 Bếp Từ Đơn Engler EGL336</a>
+                <a href="https://s.shopee.vn/903OlFx8UZ" target="_blank" class="product-item">🍊 Máy Vắt Cam Sunery SR-CJ12</a>
+                <a href="https://s.shopee.vn/6AjDO5p2hZ" target="_blank" class="product-item">🍲 Nồi Lẩu Nướng Điện Bear SB-NL45K 4.5L</a>
+                <a href="https://s.shopee.vn/gOGq0rZdt" target="_blank" class="product-item">🍗 Nồi chiên không dầu Philips 6.2 lít</a>
+                <a href="https://s.shopee.vn/4VazP8yTK4" target="_blank" class="product-item">💨 Nồi Lẩu Hấp 2 Tầng Haatz HTP099 Dung Tích 10L</a>
+            </div>
 
-    <!-- Sản phẩm 3 -->
-    <a href="https://s.shopee.vn/903OlFx8UZ" target="_blank" class="product-item">
-        🥣 Máy Vắt Cam Sunery SR-CJ12
-        <!-- Sản phẩm 4 -->
-    <a href="https://s.shopee.vn/6AjDO5p2hZ" target="_blank" class="product-item">
-        🥣 Nồi Lẩu Nướng Điện Bear SB-NL45K 4.5L
-        <!-- Sản phẩm 5 -->
-    <a href="https://s.shopee.vn/gOGq0rZdt" target="_blank" class="product-item">
-        🥣 Nồi chiên không dầu Philips 6.2 lít
-        <!-- Sản phẩm 6 -->
-    <a href="hhttps://s.shopee.vn/4VazP8yTK4" target="_blank" class="product-item">
-        🥣 Nồi Lẩu Hấp 2 Tầng Haatz HTP099 Dung Tích 10L
-    </a>
+            <!-- THƯ MỤC LỚN 2: MẸ VÀ BÉ -->
+            <button class="category-btn" onclick="toggleCategory(this)">👶 Mẹ và Bé</button>
+            <div class="products-list">
+                <a href="LINK_SẢN_PHẨM_MẸ_BÉ_1" target="_blank" class="product-item">🍼 Sữa công thức / Bình sữa cho bé chất lượng</a>
+                <a href="LINK_SẢN_PHẨM_MẸ_BÉ_2" target="_blank" class="product-item">🧸 Đồ chơi trí tuệ phát triển tư duy cho bé</a>
+            </div>
 
-</div>
-            </a>
+            <!-- THƯ MỤC LỚN 3: ĐIỆN DÂN DỤNG -->
+            <button class="category-btn" onclick="toggleCategory(this)">🔌 Điện Dân Dụng</button>
+            <div class="products-list">
+                <a href="LINK_SẢN_PHẨM_ĐIỆN_1" target="_blank" class="product-item">⚙️ Ổ cắm thông minh chống giật an toàn</a>
+                <a href="LINK_SẢN_PHẨM_ĐIỆN_2" target="_blank" class="product-item">💡 Hệ thống đèn LED tiết kiệm điện bách hóa</a>
+            </div>
 
-            <!-- Nút Link số 3 -->
-            <a href="https://yourwebsite.com" target="_blank" class="link-card">
+            <!-- THƯ MỤC LỚN 4: QUAY VÀ CHỤP -->
+            <button class="category-btn" onclick="toggleCategory(this)">📸 Quay và Chụp</button>
+            <div class="products-list">
+                <a href="LINK_SẢN_PHẨM_QUAY_CHỤP_1" target="_blank" class="product-item">🎙️ Micro thu âm cài áo làm video chuyên nghiệp</a>
+                <a href="LINK_SẢN_PHẨM_QUAY_CHỤP_2" target="_blank" class="product-item">🎬 Gậy Tripod quay chụp chống rung đa năng</a>
+            </div>
+
+            <!-- Nút Link Mạng Xã Hội -->
+            <a href="https://facebook.com" target="_blank" class="link-card">
                 📱 Kênh TikTok / Facebook của mình
             </a>
             
         </div>
     </div>
+
+    <!-- SCRIPT XỬ LÝ HIỆU ỨNG ĐÓNG MỞ -->
+    <script>
+        function toggleCategory(button) {
+            button.classList.toggle("active");
+            var content = button.nextElementSibling;
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+            } else {
+                content.style.maxHeight = content.scrollHeight + "px";
+            }
+        }
+    </script>
 
 </body>
 </html>
