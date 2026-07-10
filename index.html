@@ -1,319 +1,618 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Nguyễn Khiêm</title>
+
     <style>
+
         /* --- GIAO DIỆN CHUNG --- */
+
         body {
+
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            /* --- GIAO DIỆN CHUNG --- */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            
-            /* Mã hình nền Pinterest đã được sửa lỗi cú pháp */
-            background-image: url('https://i.pinimg.com/736x/24/5f/ba/245fba464078107f8f7a93d32669d96f.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            
+
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+
             margin: 0;
+
             padding: 20px;
+
             display: flex;
+
             justify-content: center;
+
             align-items: flex-start;
+
             min-height: 100vh;
+
             color: #333;
+
         }
-        }
+
+
 
         .bio-container {
+
             width: 100%;
+
             max-width: 480px;
+
             text-align: center;
+
             padding: 30px 20px;
+
             background: rgba(255, 255, 255, 0.9);
+
             backdrop-filter: blur(10px);
+
             border-radius: 20px;
+
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+
             box-sizing: border-box;
+
         }
+
+
 
         /* --- THÔNG TIN CÁ NHÂN --- */
+
         .avatar {
+
             width: 96px;
+
             height: 96px;
+
             border-radius: 50%;
+
             object-fit: cover;
+
             border: 3px solid #ffffff;
+
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+
         }
+
+
 
         .name {
+
             font-size: 1.2rem;
+
             font-weight: bold;
+
             margin: 15px 0 5px 0;
+
             color: #111;
+
         }
+
+
 
         .username {
+
             font-size: 0.9rem;
+
             color: #666;
+
             margin-bottom: 15px;
+
         }
+
+
 
         .description {
+
             font-size: 0.95rem;
+
             line-height: 1.4;
+
             margin-bottom: 30px;
+
             color: #444;
+
         }
+
+
 
         /* --- KHU VỰC CHỨA CÁC NÚT --- */
+
         .links-wrapper {
+
             display: flex;
+
             flex-direction: column;
+
             gap: 14px;
+
         }
+
+
 
         /* Nút link đơn độc lập */
+
         .link-card {
+
             display: block;
+
             text-decoration: none;
+
             background-color: #ffffff;
+
             color: #111111;
+
             padding: 16px 20px;
+
             border-radius: 12px;
+
             font-size: 1rem;
+
             font-weight: 600;
+
             transition: all 0.3s ease;
+
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
             border: 1px solid rgba(0,0,0,0.05);
+
             box-sizing: border-box;
+
             text-align: center;
+
         }
+
+
 
         .link-card:hover {
+
             transform: translateY(-2px);
+
             background-color: #111111;
+
             color: #ffffff;
+
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+
         }
+
+
 
         /* Nút thư mục lớn bấm xổ xuống */
+
         .category-btn {
+
             width: 100%;
+
             background-color: #ffffff;
+
             color: #111111;
+
             padding: 16px 20px;
+
             border-radius: 12px;
+
             font-size: 1rem;
+
             font-weight: 600;
+
             border: 1px solid rgba(0,0,0,0.05);
+
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+
             cursor: pointer;
+
             display: flex;
+
             justify-content: center;
+
             align-items: center;
+
             gap: 8px;
+
             box-sizing: border-box;
+
             transition: all 0.3s ease;
+
             font-family: inherit;
+
         }
+
+
 
         .category-btn:hover {
+
             background-color: #f8f9fa;
+
             border-color: #ccc;
+
         }
+
+
 
         /* Thêm ký hiệu mũi tên nhỏ ở cuối nút */
+
         .category-btn::after {
+
             content: '▼';
+
             font-size: 0.7rem;
+
             color: #888;
+
             margin-left: auto;
+
             transition: transform 0.3s ease;
+
         }
+
+
 
         .category-btn.active::after {
+
             transform: rotate(180deg);
+
         }
+
+
 
         /* Hộp chứa sản phẩm ẩn/hiện */
+
         .products-list {
+
             max-height: 0;
+
             overflow: hidden;
+
             transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+
             display: flex;
+
             flex-direction: column;
+
             gap: 8px;
+
             padding: 0 5px;
+
             text-align: left;
+
         }
+
+
 
         /* THẺ SẢN PHẨM CON BÊN TRONG - ĐÃ FIX LỖI */
+
         .product-item {
+
             display: block !important;
+
             text-decoration: none !important;
+
             background: #ffffff !important;
+
             color: #333333 !important;
+
             padding: 14px 15px !important;
+
             border-radius: 8px !important;
+
             font-size: 0.95rem !important;
+
             font-weight: 500 !important;
+
             border-left: 4px solid #ee4d2d !important; /* Vạch cam thương hiệu */
+
             box-shadow: 0 2px 4px rgba(0,0,0,0.04) !important;
+
             transition: all 0.2s ease !important;
+
             box-sizing: border-box !important;
+
         }
+
+
 
         .product-item:hover {
+
             background: #fdf5f2 !important;
+
             color: #ee4d2d !important;
+
             transform: translateX(4px);
+
         }
+
     </style>
+
 </head>
+
 <body>
 
+
+
     <div class="bio-container">
+
         <!-- Ảnh đại diện của Khiêm -->
+
         <img class="avatar" src="https://scontent.fhan15-1.fna.fbcdn.net/v/t39.30808-1/653701024_2080420979482672_2619657445145489457_n.jpg?stp=c0.343.1536.1536a_dst-jpg_tt6&cstp=mx1536x1536&ctp=s200x200&_nc_cat=109&ccb=1-7&_nc_sid=1d2534&_nc_eui2=AeGAg_S29ZpODfXMUIuAM0cfe8yqVdgDB0p7zKpV2AMHSommLXLMJekLfPKVVsNhjKaa2zpeIdWaN7ddSaS-q0hJ&_nc_ohc=f6NLJcfVVggQ7kNvwHFwcmC&_nc_oc=AdrQzWK2HISUTNZmYRCDJ-SZ6pbjKEjsVvXGz3VNM10gKowbcU0fo6KwI5TSqazKcw3x-ijXWIGI2yDHZELRhzsv&_nc_zt=24&_nc_ht=scontent.fhan15-1.fna&_nc_gid=P66iTEpnPtJDb_MSt7z5vg&_nc_ss=7b2a8&oh=00_AQBs1fwD7P5y1HD4uVJm8FP0T-f6lDsVPGpDPyt70JK5Wg&oe=6A540C65" alt="Avatar">
+
         
+
         <div class="name">Nguyễn Khiêm</div>
+
         <div class="username">@khiemnguyen</div>
+
         <div class="description"> 📦 Góc chia sẻ đồ hay.</div>
 
+
+
         <div class="links-wrapper">
+
             
+
             <!-- Nút Deal Hot -->
+
             <a href="https://s.shopee.vn/2LWY5DAxRl" target="_blank" class="link-card">
+
                 🛍️ Deal Hot Shopee Hôm Nay
+
             </a>
+
+
 
             <!-- THƯ MỤC LỚN 1: LÀM VƯỜN -->
+
              <button class="category-btn" onclick="toggleCategory(this)">🌱 Làm vườn</button>
+
              <div class="products-list">
+
                 <a href="https://s.shopee.vn/5LAB90N9b9" target="_blank" class="product-item"> 🌱 Hạt giống rau củ dễ trồng</a>
+
                 <a href="https://s.shopee.vn/5LAB95MN5q" target="_blank" class="product-item"> 🥬 Khay làm giá đỗ sạch tại nhà</a>
+
                 <a href="https://s.shopee.vn/4Vb49cZXwn" target="_blank" class="product-item"> 🧤 Găng tay làm vườn phủ PU</a>
+
                 <a href="https://s.shopee.vn/9fJAJBrrIv" target="_blank" class="product-item"> 💦 Vòi tưới cây nhỏ giọt tự động</a>
+
                 <a href="https://s.shopee.vn/7KvFX1Oeky" target="_blank" class="product-item"> 🌳 Humic Mỹ - Kích rễ, cải tạo đất</a>
+
                 <a href="https://s.shopee.vn/8KnmnIK6Gf" target="_blank" class="product-item"> 🪴 Giàn leo nhựa - Gọn vườn, dễ lắp</a>
+
                 <a href="https://s.shopee.vn/4Vb4EOdEqy" target="_blank" class="product-item"> 🌿 Bộ dụng cụ làm vườn đa năng</a>
+
                 <a href="https://s.shopee.vn/40endXrCts" target="_blank" class="product-item"> 💧 Bình tưới cây 2L & 3L tiện dụng</a>
+
                 <a href="https://s.shopee.vn/3B5ge5atjJ" target="_blank" class="product-item"> 🌱 Kéo làm vườn đa năng</a>
+
                 <a href="https://s.shopee.vn/50XKpXMwu9" target="_blank" class="product-item"> ✂️ Kéo cắt cành trên cao đa năng</a>
+
                 <a href="https://s.shopee.vn/9fJAOEYb70" target="_blank" class="product-item"> 🚿 Vòi tưới cây & rửa xe 2 trong 1</a>
+
                 <a href="https://s.shopee.vn/5fn1d0wPy7" target="_blank" class="product-item"> 🌱 Khay gieo hạt - Ươm cây dễ nảy mầm</a>
+
                 <a href="https://s.shopee.vn/6AjIE3nE82" target="_blank" class="product-item"> 🌳 Bộ tưới cây hẹn giờ tự động</a>
+
                 <a href="https://s.shopee.vn/qhlsNv9iJ" target="_blank" class="product-item"> 🌱 Viên đất nén xơ dừa</a>
+
                 <a href="https://s.shopee.vn/6pyz1VAVig" target="_blank" class="product-item"> 🍅 Đất Tribat cho rau & hoa</a>
+
                 <a href="https://s.shopee.vn/8KnmoKy6cT" target="_blank" class="product-item"> 🪨 Đá Pumice GreenHome 500g</a>
+
              </div>
+
             <!-- THƯ MỤC LỚN 2: ĐỒ GIA DỤNG -->
+
             <button class="category-btn" onclick="toggleCategory(this)"> 🏠 Đồ Gia Dụng</button>
+
             <div class="products-list">
+
                 <a href="https://s.shopee.vn/2BD4cU20EK" target="_blank" class="product-item">🍳 Nồi nấu cháo chậm Beer - Nhừ mềm, mẹ nhàn hơn</a>
+
                 <a href="https://s.shopee.vn/70IKNU7Nac" target="_blank" class="product-item">🔥 Bếp từ Engler - Nấu siêu nhanh, tiết kiệm điện</a>
+
                 <a href="https://s.shopee.vn/903OlFx8UZ" target="_blank" class="product-item">🍊 Máy vắt cam tự động - Ly nước ép chỉ 30 giây</a>
+
                 <a href="https://s.shopee.vn/6AjDO5p2hZ" target="_blank" class="product-item">🍲 Nồi lẩu nướng 2 trong 1 - Ăn ngon tại nhà</a>
+
                 <a href="https://s.shopee.vn/gOGq0rZdt" target="_blank" class="product-item">🍗 Nồi chiên Philips 6.2L - Giòn ngon, ít dầu mỡ</a>
+
                 <a href="https://s.shopee.vn/4VazP8yTK4" target="_blank" class="product-item">💨 Nồi lẩu hấp 2 tầng 10L - Tiệc đông người cực tiện</a>
+
                 <a href="https://s.shopee.vn/70IKNmZ6GL" target="_blank" class="product-item">💨 🎁 Combo 10 gói màng bọc - Dùng cả năm, siêu tiết kiệm</a>
+
                 <a href="https://s.shopee.vn/5AqgCQbCtN" target="_blank" class="product-item">🌶️ Máy xay tỏi ớt - Bấm vài giây là nhuyễn</a>
+
                 <a href="https://s.shopee.vn/40eioXvnoe" target="_blank" class="product-item">💧 Bộ lõi lọc Kangaroo - Nước sạch, thay nhanh</a>
+
                 <a href="https://s.shopee.vn/gOGqRdA5X" target="_blank" class="product-item">☕ Ấm siêu tốc Gaabor - Sôi nhanh chỉ vài phút</a>
+
                 <a href="https://s.shopee.vn/AKYmMRj6QR" target="_blank" class="product-item">🍲 Nồi lẩu điện Mandeli - Công suất lớn, nóng cực nhanh</a>
+
                 <a href="https://s.shopee.vn/20teRE4dQz" target="_blank" class="product-item">🥩 Máy xay thịt đa năng - Xay khỏe, vệ sinh dễ</a>
+
                 <a href="https://s.shopee.vn/6L2dbFgohX" target="_blank" class="product-item">🧽 Kệ để đồ rửa chén - Gọn bếp, sạch sẽ hơn</a>
+
                 
 
+
+
             </div>
+
+
 
             <!-- THƯ MỤC LỚN 3: MẸ VÀ BÉ -->
+
             <button class="category-btn" onclick="toggleCategory(this)">👶 Mẹ và Bé</button>
+
             <div class="products-list">
+
                 <a href="https://s.shopee.vn/6ffU0EX9Ou" target="_blank" class="product-item">👶 Kem bôi hăm Bon Bon - Dịu da bé yêu</a>
+
                 <a href="https://s.shopee.vn/2LWZeLsOcP" target="_blank" class="product-item">🧸 🛁 Sữa tắm gội dịu nhẹ - Không Sulfat</a>
+
                 <a href="https://s.shopee.vn/50XG1DFWs1" target="_blank" class="product-item">🌿 Kem làm dịu da - Hỗ trợ phục hồi nhanh</a>
+
                 <a href="https://s.shopee.vn/18a43XH4f" target="_blank" class="product-item">💆 Dầu massage cho bé - Thư giãn, dễ chịu</a>
+
                 <a href="https://s.shopee.vn/4qDpoxNGmv" target="_blank" class="product-item">🌿 Nước tắm thảo mộc - Làm sạch dịu nhẹ</a>
+
                 <a href="https://s.shopee.vn/LlQSk4pCN" target="_blank" class="product-item">🌱 Tinh dầu tràm nguyên chất - Giữ ấm cho bé</a>
+
                 <a href="https://s.shopee.vn/80Arar1dIF" target="_blank" class="product-item">❤️ Tinh dầu tràm mini - Bé đi đâu cũng mang theo</a>
+
                 <a href="https://s.shopee.vn/6VM3o9vtfr" target="_blank" class="product-item">🤱 Kem nứt đầu ti - Mẹ sau sinh nên có</a>
+
                 <a href="https://s.shopee.vn/9AMoz62foW" target="_blank" class="product-item">✨ Sữa tắm gừng nghệ - Giữ ấm & thơm da</a>
+
                 <a href="https://s.shopee.vn/2qSlRWHfu2" target="_blank" class="product-item">❤️ Tinh dầu giữ ấm - Mẹ và bé đều dùng được</a>
+
                 <a href="https://s.shopee.vn/70IKPDPXyM" target="_blank" class="product-item">👜 Túi cói cao cấp - Đẹp, tiện mang đi</a>
+
                 <a href="https://s.shopee.vn/2LWUqggePB" target="_blank" class="product-item">🌿 Xịt khử mùi thảo mộc - Tự tin cả ngày</a>
+
                 <a href="https://s.shopee.vn/3LP5IhaLNI" target="_blank" class="product-item">🚼 Xe đẩy gấp gọn - Nhẹ, tiện mang theo</a>
+
                 <a href="https://s.shopee.vn/1VxNrd6pEW" target="_blank" class="product-item">😴 Gối chống trào ngược - Bé ngủ ngon hơn</a>
+
                 <a href="https://s.shopee.vn/30mBeRDaEA" target="_blank" class="product-item">🧺 Set 5 khăn sữa sợi tre - Mềm mại cho bé</a>
+
                 <a href="https://s.shopee.vn/9UzfORAvo3" target="_blank" class="product-item">💧 Khăn vải khô đa năng - Nhà có bé nên có</a>
+
                 <a href="https://s.shopee.vn/50XG2Cusrf" target="_blank" class="product-item">👶 Tấm lót thay bỉm - Tiện lợi, sạch sẽ</a>
+
                 <a href="https://s.shopee.vn/4fuPdeXiIm" target="_blank" class="product-item">🦷 Kem đánh răng trẻ em - Bảo vệ răng bé</a>
+
                 <a href="https://s.shopee.vn/4Ay93ErtPK" target="_blank" class="product-item">🐻 Combo bàn chải gấu - Bé thích đánh răng hơn</a>
+
                 <a href="https://s.shopee.vn/1VxNsUKkdS" target="_blank" class="product-item">🎵 Xe tập đi 5in1 - Vừa chơi vừa học</a>
+
                 <a href="https://s.shopee.vn/6ffU21IUYH" target="_blank" class="product-item">🛏️ Thanh chắn giường - An tâm khi bé ngủ</a>
+
                 <a href="https://s.shopee.vn/qhh5KDDYP" target="_blank" class="product-item">🍽️ Yếm silicon - Ăn dặm không lo bẩn áo</a>
+
                 <a href="https://s.shopee.vn/4qDpqhAvGY" target="_blank" class="product-item">🧩 Combo đồ chơi gỗ - Phát triển tư duy</a>
+
                 <a href="https://s.shopee.vn/gOLa6MOTg" target="_blank" class="product-item">🍼 Nước giặt Bon Bon - Lựa chọn cho quần áo trẻ nhỏ</a>
 
+
+
             </div>
+
+
 
             <!-- THƯ MỤC LỚN 4: ĐIỆN DÂN DỤNG -->
+
             <button class="category-btn" onclick="toggleCategory(this)">🔌 Điện Dân Dụng</button>
+
             <div class="products-list">
+
                 <a href="https://s.shopee.vn/3LP247kYvx" target="_blank" class="product-item">⚡ Aptomat CHINT - Bảo vệ điện an toàn</a>
+
                 <a href="https://s.shopee.vn/9KgFDD06fN" target="_blank" class="product-item">🛡️ CB chống giật Panasonic - An tâm cho cả nhà</a>
+
                 <a href="https://s.shopee.vn/2Vpv4fwVZS" target="_blank" class="product-item">🌿 Máy lọc không khí UV - Không gian sạch hơn</a>
+
                 <a href="https://s.shopee.vn/9pcVoBF8kO" target="_blank" class="product-item">🍽️ Máy rửa chén Bosch - Rửa sạch, tiết kiệm thời gian</a>
+
                 <a href="https://s.shopee.vn/5q6N2qdnJY" target="_blank" class="product-item">🧊 Máy làm đá mini - Có đá sạch chỉ sau ít phút</a>
+
                 <a href="https://s.shopee.vn/5VTWeGN4N3" target="_blank" class="product-item">🤖 Robot hút bụi - Nhà sạch không cần động tay</a>
+
                 <a href="https://s.shopee.vn/8V78DnjPXc" target="_blank" class="product-item">💨 Quạt phun sương mini - Mát tức thì ngày nóng</a>
+
                 <a href="https://s.shopee.vn/1LdxgeIKiU" target="_blank" class="product-item">⚙️ 🧹 Máy hút bụi cầm tay - Gọn nhẹ, hút cực khỏe</a>
+
                 <a href="https://s.shopee.vn/5LA6S22dp6" target="_blank" class="product-item">🔋 Quạt tích điện - Mất điện vẫn mát cả đêm</a>
+
                 <a href="https://s.shopee.vn/18a6FZKOA" target="_blank" class="product-item">🌬️ Quạt trần 5 cánh - Mát đều, tiết kiệm điện</a>
+
                 <a href="https://s.shopee.vn/5AqgFpftRc" target="_blank" class="product-item">🔌 Ổ cắm 8 lỗ - Chống cháy, dùng cả góc làm việc</a>
+
                 <a href="https://s.shopee.vn/1qaEHirlbS" target="_blank" class="product-item">⚡ Ổ cắm an toàn - Nhỏ gọn, tiện mọi nơi</a>
+
                 <a href="https://s.shopee.vn/9UzfPpVjpd" target="_blank" class="product-item">🔌 Ổ cắm 6 lỗ - Cắm nhiều thiết bị cùng lúc</a>
+
                 <a href="https://s.shopee.vn/3B5bsEO77J" target="_blank" class="product-item">💡 Ổ cắm 4 công tắc - Tắt mở từng thiết bị tiện lợi</a>
 
+
+
             </div>
+
+
 
             <!-- THƯ MỤC LỚN 5: QUAY VÀ CHỤP -->
+
             <button class="category-btn" onclick="toggleCategory(this)">📸 Quay và Chụp</button>
+
             <div class="products-list">
+
                 <a href="https://s.shopee.vn/5LA6STrbcM" target="_blank" class="product-item">🎬 Quay video đẹp không cần biết nhiều kỹ thuật</a>
+
                 <a href="https://s.shopee.vn/gOGu1EWCG" target="_blank" class="product-item">🏍️ Chống rung cực đỉnh cho mọi chuyến đi</a>
+
                 <a href="https://s.shopee.vn/6AjDS8yGOS" target="_blank" class="product-item">🎙️ Giọng nói trong trẻo, không sợ tạp âm</a>
+
                 <a href="https://s.shopee.vn/70IKRnfxyt" target="_blank" class="product-item">🛍️ Chụp ảnh sản phẩm đẹp như studio</a>
+
                 <a href="https://s.shopee.vn/60PnFyvGLU" target="_blank" class="product-item">☀️ Tạo ánh nắng cực thật cho video</a>
+
                 <a href="https://s.shopee.vn/2BD4gxDIkF" target="_blank" class="product-item">🌈 Thêm màu sắc, video nổi bật hơn</a>
+
                 <a href="https://s.shopee.vn/9AMp1pqVkz" target="_blank" class="product-item">💡 Ánh sáng đẹp giúp lên hình tự nhiên</a>
+
             </div>
 
+
+
             <!-- Nút Link Mạng Xã Hội -->
+
             <a href="https://www.tiktok.com/@vuonnhabao?_r=1&_t=ZS-97rjfeCOCfq" target="_blank" class="link-card">
+
                 📱 Kênh TikTok  của mình
+
             </a>
+
             
+
         </div>
+
     </div>
 
+
+
     <!-- SCRIPT XỬ LÝ HIỆU ỨNG ĐÓNG MỞ -->
+
     <script>
+
         function toggleCategory(button) {
+
             button.classList.toggle("active");
+
             var content = button.nextElementSibling;
+
             if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+
                 content.style.maxHeight = "0px";
+
             } else {
+
                 content.style.maxHeight = content.scrollHeight + "px";
+
             }
+
         }
+
     </script>
 
+
+
 </body>
-</html>
+
+</html> 
+
