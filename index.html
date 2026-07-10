@@ -9,12 +9,9 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             
-            /* Hình nền ảnh gốc Pinterest nét căng */
-            background-image: url('https://i.pinimg.com/originals/24/5f/ba/245fba464078107f8f7a93d32669d96f.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: scroll;
+            /* Nền màu xanh Matcha dịu nhẹ, mượt mà và nét căng trên mọi thiết bị */
+            background: linear-gradient(135deg, #f4f8f3 0%, #cbdcc6 100%);
+            background-attachment: fixed; /* Giữ màu nền cố định sang xịn mịn khi cuộn trang */
             
             margin: 0;
             padding: 20px;
@@ -25,24 +22,17 @@
             color: #333;
         }
 
-        /* Giữ cố định hình nền khi cuộn trên máy tính */
-        @media (min-width: 768px) {
-            body {
-                background-attachment: fixed;
-            }
-        }
-
         /* KHUNG TRẮNG CHÍNH GIỮA MÀN HÌNH */
         .bio-container {
             width: 100%;
             max-width: 480px;
             text-align: center;
             padding: 30px 20px;
-            background: rgba(255, 255, 255, 0.95); /* Khung nền trắng làm nổi bật nội dung */
+            background: rgba(255, 255, 255, 0.96); /* Khung nền trắng làm nổi bật nội dung */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(100, 120, 95, 0.15); /* Đổ bóng màu rêu nhẹ hài hòa */
             box-sizing: border-box;
         }
 
