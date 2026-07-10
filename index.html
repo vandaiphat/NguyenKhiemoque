@@ -12,27 +12,32 @@
 
     <style>
 
-        /* --- GIAO DIỆN CHUNG --- */
-
+       /* --- GIAO DIỆN CHUNG --- */
         body {
-
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-
+            
+            /* Đã chuyển sang link ảnh GỐC nét căng và bật chế độ tương thích điện thoại */
+            background-image: url('https://i.pinimg.com/originals/24/5f/ba/245fba464078107f8f7a93d32669d96f.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: scroll; /* Giúp điện thoại hiển thị mượt mà, không bị lỗi */
+            
             margin: 0;
-
             padding: 20px;
-
             display: flex;
-
             justify-content: center;
-
             align-items: flex-start;
-
             min-height: 100vh;
-
             color: #333;
+        }
+
+        /* Chỉ bật hiệu ứng hình nền đứng im khi xem bằng máy tính màn hình lớn */
+        @media (min-width: 768px) {
+            body {
+                background-attachment: fixed;
+            }
+        }
 
         }
 
